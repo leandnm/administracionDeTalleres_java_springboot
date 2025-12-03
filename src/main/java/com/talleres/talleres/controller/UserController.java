@@ -46,7 +46,24 @@ public class UserController{
         return ApiResponse.success("Usuario Agregado", fulano);
     }
 
+    @PutMapping("/{id}")
+    public ApiResponse actualizarUsuario(@PathVariable Long id, @RequestBody UserRequest user) {
 
+        Optional<User> dataUser = userRepository.findById(id);
 
+        if (dataUser.isEmpty()) {
+            return ApiResponse.errorNotFound("Usuario no encontrado");
+        }
+
+        User usuario = dataUser.get();
+
+        usuario.setName(user.getName());
+        usuario.setAge(user.getAge());
+        usuario.setEmail(user.getEmail());
+
+        userRepository.save(usuario);
+
+        return ApiResponse.success("Usuario Actualizado", usuario);
+    }
 
 }
