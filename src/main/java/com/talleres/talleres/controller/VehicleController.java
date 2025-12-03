@@ -59,4 +59,33 @@ public class VehicleController {
 
     }
 
+    @PutMapping("/{id}")
+    public ApiResponse actualizarVehicle(@PathVariable Long id, @RequestBody VehicleRequest vehicle){
+
+        Optional<Vehicle> dataVehicle = vehicleRepository.findById(id);
+
+        if (dataVehicle.isEmpty()){
+            return ApiResponse.errorNotFound("Vehiculo no encontrado");
+        }
+
+        Optional<User> dataUser = userRepository.findById(vehicle.getUserId());
+
+        if (dataUser.isEmpty()){
+            return ApiResponse.errorNotFound("Usuario no encontrado");
+        }
+
+        User usuario = dataUser.get();
+
+        Vehicle vehiculo = dataVehicle.get();
+        vehiculo.setMark(vehicle.getMark());
+        vehiculo.setModel(vehicle.getModel());
+        vehiculo.setTuition(vehicle.getTuition());
+        vehiculo.setUser(usuario);
+
+        vehicleRepository.save(vehiculo);
+
+        return ApiResponse.success("Vehiculo actualizado exitosamente", vehicle);
+
+    }
+
 }
