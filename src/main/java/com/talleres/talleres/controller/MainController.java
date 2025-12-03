@@ -5,7 +5,6 @@ import com.talleres.talleres.model.Vehicle;
 import com.talleres.talleres.repository.UserRepository;
 import com.talleres.talleres.repository.VehicleRepository;
 import com.talleres.talleres.response.ApiResponse;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,10 +44,8 @@ public class MainController {
 
         vehicleRepository.save(carro);
 
-        ApiResponse respuesta = ApiResponse.success("vehiculo encontrado", carro);
 
-
-        return respuesta;
+        return ApiResponse.success("vehiculo encontrado", carro);
     }
 
 
