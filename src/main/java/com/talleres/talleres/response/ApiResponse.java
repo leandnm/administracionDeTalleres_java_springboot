@@ -50,6 +50,18 @@ public class ApiResponse {
         return response;
     }
 
+    public static ApiResponse recursoCreado(String message, Object data){
+
+        ApiResponse response = new ApiResponse();
+        response.setSuccess(true);
+        response.setCode(201);
+        response.setTimestamp(LocalDateTime.now());
+        response.setMessage(message);
+        response.setData(data);
+
+        return response;
+    }
+
     public Integer getCode() {
         return code;
     }
