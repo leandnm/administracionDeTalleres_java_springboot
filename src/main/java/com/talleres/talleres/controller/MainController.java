@@ -26,14 +26,7 @@ public class MainController {
         return "hola mundo";
     }
 
-    @GetMapping("/user")
-    public String getUser(){
-        User leandro = new User("Leandro","leandropepe1234@gmail.com");
-        leandro.setAge(15);
-        leandro.setId(1L);
 
-        return leandro.toString();
-    }
 
     @GetMapping("/vehicle")
     public ApiResponse getVehicle(){
@@ -58,21 +51,7 @@ public class MainController {
         return respuesta;
     }
 
-    @GetMapping("/user/{id}")
-    public ApiResponse getUserById(@PathVariable Long id){
 
-        System.out.println(id);
-
-        Optional<User> usuarioSolicitado = userRepository.findById(id);
-
-        if (usuarioSolicitado.isEmpty()){
-            return ApiResponse.errorNotFound("Usuario no encontrado");
-        }
-        User usuario = usuarioSolicitado.get();
-
-        return ApiResponse.success("Usuario encontrado",usuario);
-
-    }
 
     @GetMapping("/vehicle/{id}")
     public ApiResponse getVehicleById(@PathVariable Long id){
@@ -87,4 +66,6 @@ public class MainController {
         return ApiResponse.success("vehiculo encontrado",vehiculo);
 
     }
+
+
 }
