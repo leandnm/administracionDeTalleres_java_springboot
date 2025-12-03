@@ -88,4 +88,20 @@ public class VehicleController {
 
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ApiResponse eliminarVehicles(@PathVariable Long id){
+
+        Optional<Vehicle> dataVehicle = vehicleRepository.findById(id);
+
+        if (dataVehicle.isEmpty()){
+            return ApiResponse.errorNotFound("Vehiculo no encontrado");
+        }
+
+        vehicleRepository.deleteById(id);
+
+        return ApiResponse.success("Vehiculo eliminado exitosamente", null);
+    }
+
+
+
 }
