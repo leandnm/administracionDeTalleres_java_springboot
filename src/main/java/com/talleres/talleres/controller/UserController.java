@@ -66,4 +66,12 @@ public class UserController{
         return ApiResponse.success("Usuario Actualizado", usuario);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ApiResponse eliminarUsuario(@PathVariable Long id){
+
+        userRepository.deleteById(id);
+
+        return ApiResponse.success("El usuario ha sido eliminado", null);
+    }
+
 }
