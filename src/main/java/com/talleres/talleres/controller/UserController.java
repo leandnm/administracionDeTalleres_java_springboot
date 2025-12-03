@@ -7,6 +7,7 @@ import com.talleres.talleres.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -72,6 +73,15 @@ public class UserController{
         userRepository.deleteById(id);
 
         return ApiResponse.success("El usuario ha sido eliminado", null);
+    }
+
+    @GetMapping("/all")
+    public ApiResponse listarUsuarios(){
+
+        List<User> listaUsers = userRepository.findAll();
+
+        return ApiResponse.success("Aqui esta la lista de usuarios", listaUsers);
+
     }
 
 }
