@@ -9,6 +9,7 @@ import com.talleres.talleres.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -100,6 +101,14 @@ public class VehicleController {
         vehicleRepository.deleteById(id);
 
         return ApiResponse.success("Vehiculo eliminado exitosamente", null);
+    }
+
+    @GetMapping("/all")
+    public ApiResponse listarVehicles(){
+
+        List<Vehicle> listaVehicles = vehicleRepository.findAll();
+
+        return ApiResponse.success("Aqui estan los vehiculos", listaVehicles);
     }
 
 
